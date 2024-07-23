@@ -39,7 +39,15 @@ const scene = new THREE.Scene()
 
 //Camera
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
-camera.position.z = 6
+function updateCamera() {
+    if (window.innerWidth > 426) {
+        camera.position.z = 6
+    } else {
+        camera.position.z = 10
+    }
+}
+
+updateCamera()
 
 //Canvas Resize
 function resize() {
@@ -104,9 +112,7 @@ requestAnimationFrame(update)
 function update() {
     requestAnimationFrame(update)
 
-    // scene.children.forEach(mesh => {
-        uniforms.uTime.value = clock.getElapsedTime() / 1000
-    // })
+    uniforms.uTime.value = clock.getElapsedTime() / 1000
 
     renderer.render( scene, camera )
 }
